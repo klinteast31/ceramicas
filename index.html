@@ -27,6 +27,7 @@ html,body{overflow-x:clip}
 h1{font-size:46px!important}
 h2{font-size:36px!important}
 #unica-titulo{font-size:48px!important}
+#glow{width:560px!important;height:560px!important;bottom:60px!important}
 }
 </style>
 <script src="assets/three-r159.min.js"></script>
@@ -71,6 +72,9 @@ Role para baixo
 
 <!-- Feixe em degradê atrás do vaso: começa aqui e termina na seção seguinte -->
 <div aria-hidden="true" style="position: absolute; z-index: 0; left: 0; right: 0; bottom: 0; height: 240px; background: linear-gradient(90deg, #F4E4D4 0%, #EBC2A0 20%, #D9965F 50%, #EBC2A0 80%, #F4E4D4 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 100%); mask-image: linear-gradient(to bottom, transparent 0%, #000 100%)" id="beam"></div>
+
+<!-- Degradê radial atrás da cerâmica -->
+<div aria-hidden="true" id="glow" style="position: absolute; z-index: 0; left: 50%; bottom: 20px; width: 820px; height: 820px; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(217,150,95,0.55) 0%, rgba(232,184,140,0.38) 38%, rgba(240,210,182,0.18) 62%, rgba(244,228,212,0) 100%); opacity: .25"></div>
 
 <!-- A peça, em 3D -->
 <div style="position: absolute; z-index: 1; left: 50%; bottom: 65px; width: 440px; height: 560px; will-change: transform; transform-origin: 50% 100%; transform: translate(-50%, -700px)" id="vase">
@@ -238,7 +242,7 @@ Role para baixo
   // Hero: a peça desce com o scroll
   const state = { p: 0, dead: false };
   const track = document.querySelector('[data-track="hero"]');
-  const intro = document.getElementById('intro'), hint = document.getElementById('hint'), beam = document.getElementById('beam'), vase = document.getElementById('vase');
+  const intro = document.getElementById('intro'), hint = document.getElementById('hint'), beam = document.getElementById('beam'), glow = document.getElementById('glow'), vase = document.getElementById('vase');
   function update() {
     const r = track.getBoundingClientRect();
     const travel = r.height - 820;
@@ -247,6 +251,7 @@ Role para baixo
     const k = window.innerWidth < 640 ? 1 : 1.15;
     vase.style.transform = 'translate(-50%, ' + (-700 * (1 - e)).toFixed(1) + 'px) scale(' + k + ')';
     beam.style.opacity = (0.25 + 0.75 * e).toFixed(3);
+    glow.style.opacity = (0.25 + 0.75 * e).toFixed(3);
     intro.style.opacity = clamp(1 - p * 3).toFixed(3);
     intro.style.transform = 'translateY(' + (-40 * d).toFixed(1) + 'px)';
     hint.style.opacity = clamp(1 - p * 6).toFixed(3);
