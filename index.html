@@ -73,7 +73,7 @@ Role para baixo
 </div>
 
 <!-- Feixe em degradê atrás do vaso: começa aqui e termina na seção seguinte -->
-<div aria-hidden="true" style="position: absolute; z-index: 0; left: 0; right: 0; bottom: 0; height: 240px; background: linear-gradient(90deg, #F4E4D4 0%, #EBC2A0 20%, #D9965F 50%, #EBC2A0 80%, #F4E4D4 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 100%); mask-image: linear-gradient(to bottom, transparent 0%, #000 100%)" id="beam"></div>
+<div aria-hidden="true" style="position: absolute; z-index: 0; left: 0; right: 0; bottom: 0; height: 120px; background: linear-gradient(90deg, #F4E4D4 0%, #EBC2A0 20%, #D9965F 50%, #EBC2A0 80%, #F4E4D4 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 100%); mask-image: linear-gradient(to bottom, transparent 0%, #000 100%)" id="beam"></div>
 
 <!-- Degradê radial atrás da cerâmica -->
 <div aria-hidden="true" id="glow" style="position: absolute; z-index: 0; left: 50%; bottom: 20px; width: 820px; height: 820px; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(217,150,95,0.55) 0%, rgba(232,184,140,0.38) 38%, rgba(240,210,182,0.18) 62%, rgba(244,228,212,0) 100%); opacity: .25"></div>
@@ -253,6 +253,7 @@ Role para baixo
     const k = window.innerWidth < 640 ? 1 : 1.15;
     vase.style.transform = 'translate(-50%, ' + (-700 * (1 - e)).toFixed(1) + 'px) scale(' + k + ')';
     beam.style.opacity = (0.25 + 0.75 * e).toFixed(3);
+    beam.style.height = (120 + 460 * e).toFixed(0) + 'px'; // o degradê sobe junto com a descida da peça
     glow.style.opacity = (0.25 + 0.75 * e).toFixed(3);
     intro.style.opacity = clamp(1 - p * 3).toFixed(3);
     intro.style.transform = 'translateY(' + (-40 * d).toFixed(1) + 'px)';
